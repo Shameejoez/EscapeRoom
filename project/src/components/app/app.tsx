@@ -11,7 +11,7 @@ import history from '../../history';
 import NotFound from '../Not-found';
 import PrivateRoute from '../Private-route';
 import Error from '../Error';
-import CancelQuest from '../CancelQuest';
+import CancelQuest from '../Cancel-quest';
 
 
 function App(): JSX.Element {

@@ -26,7 +26,7 @@ type MapProps = {
 
 export function Map ({location, center , onClickCurrent = () => void 0, activeAdress }: MapProps): JSX.Element {
 
-  const INT_FOR_RANDOM = 0.004;
+  const INT_FOR_RANDOM = 0.0005;
   const changeRandom = (int: number) => (Math.random() * INT_FOR_RANDOM);
 
   const onClickGetCoords = (coord: number []) => {

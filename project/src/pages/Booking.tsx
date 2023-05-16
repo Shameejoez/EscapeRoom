@@ -12,26 +12,23 @@ export function Booking(): JSX.Element | null {
   const params = useParams();
   const dispatch = useAppDispatch();
   const bookingInfo = useAppSelector(getBookingsInfo);
-
   const isBookingInfoLoading = useAppSelector(getIsBookingsInfoLoading);
   const quest = useAppSelector(getQuest);
   const defaultAdress = bookingInfo.map((el) => el.location.address);
 
-
-  const [currentAdress, setCurrentAdress] = useState<number[]>();
+  const [currentAdress, setCurrentAdress] = useState<number[]>(bookingInfo[0].location.coords);
 
 
   useEffect(() => {
     const {id} = params;
 
-    if (id) {
+    if (!bookingInfo && id) {
       dispatch(fetchQuest(id));
       dispatch(fetchBookingInfo(id));
-
-
     }
 
-  }, [params, dispatch, ]);
+
+  }, [params, dispatch, bookingInfo ]);
 
   if (!quest) {
     return null;

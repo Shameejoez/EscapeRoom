@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { SiteStore } from '../../types/state';
-import { FilterThemesIcon, FilterItemComplexity, StoreSliceName } from '../../utils/consts';
+import { FilterThemesIcon, FilterItemComplexity, StoreSliceName, ActivePlaceName } from '../../utils/consts';
 import { QuestName } from '../../types/types';
 
 const initialState: SiteStore = {
   type: FilterThemesIcon[0]['name'],
-  level: FilterItemComplexity[0]
+  level: FilterItemComplexity[0],
+  activePage: ActivePlaceName.Quests
 };
 
 
@@ -18,8 +19,11 @@ export const siteSlicer = createSlice({
     },
     setLevel:(state, action: PayloadAction<string>) => {
       state.level = action.payload;
+    },
+    setActivePage:(state, action: PayloadAction<ActivePlaceName>) => {
+      state.activePage = action.payload;
     }
   }
 });
 
-export const {setType, setLevel} = siteSlicer.actions;
+export const {setType, setLevel, setActivePage} = siteSlicer.actions;

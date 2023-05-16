@@ -6,17 +6,18 @@ import { getReservedQuests } from '../store/data-process/data-selectors';
 
 export function MyBookings (): JSX.Element {
   const dispatch = useAppDispatch();
-  const intForKey = 3242;
+  const INT_FOR_KEY = 3242;
   const myQuest = useAppSelector(getReservedQuests);
-  const myCardQuest = myQuest.map(({quest, placeId}) => ({id: placeId, card: quest }));
+  const myCardQuest = myQuest.map(({quest, id}) => ({placeId: id, card: quest }));
   const randomKey = (max: number) =>(Math.random() * max);
 
   useEffect(() => {
     dispatch(fetchReservedQuests());
-  });
+
+  }, [dispatch]);
 
   const renderMyQuest = () =>
-    myCardQuest.map((card) => <QuestCard place={'my-quest'} key={`${randomKey(intForKey)}${card.id}`} data={card.card}/>);
+    myCardQuest.map((card) => <QuestCard place={'my-quest'} key={`${randomKey(INT_FOR_KEY)}${card.placeId}`} data={card.card} placeId={card.placeId}/>);
 
   return (
     <main className="page-content decorated-page">

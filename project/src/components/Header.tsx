@@ -5,16 +5,17 @@ import { ActivePlaceName, AppRoutes, Authorization } from '../utils/consts';
 import { logout } from '../store/user-process/user-slicer';
 import { checkUserAuth } from '../store/action';
 import { Footer } from './Footer';
-import { useState } from 'react';
+import { getActivePage } from '../store/site-procces/site-selectors';
+import { setActivePage } from '../store/site-procces/site-slicer';
 
 
 export function Header(): JSX.Element {
   const dispatch = useAppDispatch();
   const isAuth = useAppSelector(getUserStatus);
-  const [currentPage, setCurrentPage] = useState<ActivePlaceName>();
+  const getCurrentPage = useAppSelector(getActivePage);
 
   const handlCurrentPage = (data: ActivePlaceName) => {
-    setCurrentPage(data);
+    dispatch(setActivePage(data));
   };
 
   const handleLogoutClick = () => {
@@ -34,14 +35,14 @@ export function Header(): JSX.Element {
           <nav className="main-nav header__main-nav">
             <ul className="main-nav__list">
               <li className="main-nav__item">
-                <Link className={`link ${currentPage === ActivePlaceName.Quests ? 'active' : ''}` }to={AppRoutes.Main} onClick={() =>handlCurrentPage(ActivePlaceName.Quests)}>Квесты</Link>
+                <Link className={`link ${getCurrentPage === ActivePlaceName.Quests ? 'active' : ''}` }to={AppRoutes.Main} onClick={() =>handlCurrentPage(ActivePlaceName.Quests)}>Квесты</Link>
               </li>
               <li className="main-nav__item">
-                <Link className={`link ${currentPage === ActivePlaceName.Contacts ? 'active' : ''}` } to={`${AppRoutes.Contacts}`} onClick={() =>handlCurrentPage(ActivePlaceName.Contacts)}>Контакты</Link>
+                <Link className={`link ${getCurrentPage === ActivePlaceName.Contacts ? 'active' : ''}` } to={`${AppRoutes.Contacts}`} onClick={() =>handlCurrentPage(ActivePlaceName.Contacts)}>Контакты</Link>
               </li>
               {isAuth === Authorization.Auth &&
               <li className="main-nav__item">
-                <Link className={`link ${currentPage === ActivePlaceName.MyQuests ? 'active' : ''}` } to={AppRoutes.MyQusets} onClick={() =>handlCurrentPage(ActivePlaceName.MyQuests)}>Мои бронирования</Link>
+                <Link className={`link ${getCurrentPage === ActivePlaceName.MyQuests ? 'active' : ''}` } to={AppRoutes.MyQusets} onClick={() =>handlCurrentPage(ActivePlaceName.MyQuests)}>Мои бронирования</Link>
               </li>}
             </ul>
           </nav>

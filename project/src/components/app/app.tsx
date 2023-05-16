@@ -11,6 +11,7 @@ import history from '../../history';
 import NotFound from '../Not-found';
 import PrivateRoute from '../Private-route';
 import Error from '../Error';
+import CancelQuest from '../CancelQuest';
 
 
 function App(): JSX.Element {
@@ -24,6 +25,7 @@ function App(): JSX.Element {
           <Route path={'/*'} element={<NotFound/>}/>
           <Route path={`${AppRoutes.Quest}/:id`} element={<Quest />}/>
           <Route path={AppRoutes.Error} element={<Error />}/>
+          <Route path={AppRoutes.CancelQuest} element={<CancelQuest />}/>
           <Route path={`${AppRoutes.Quest}/:id${AppRoutes.Booking}`}
             element={
               <PrivateRoute >

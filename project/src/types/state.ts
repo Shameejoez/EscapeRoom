@@ -1,5 +1,5 @@
 import type { QuestCardData, QuestDetails, User, BookingData, ReservedQuests, QuestName } from './types';
-import { Authorization, } from '../utils/consts';
+import { ActivePlaceName, Authorization, } from '../utils/consts';
 import { store } from '../store';
 
 export type State = ReturnType <typeof store.getState>;
@@ -24,5 +24,6 @@ export type UserStore = {
 export type SiteStore = {
     type: QuestName;
     level: string;
+    activePage: ActivePlaceName;
 }
 

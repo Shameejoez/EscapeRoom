@@ -2,15 +2,23 @@ import type { QuestCardData } from '../types/types';
 import { Link } from 'react-router-dom';
 import { AppRoutes } from '../utils/consts';
 import { superTranslator } from '../utils/util';
+import { useAppDispatch } from '../hooks';
+import { deleteBookingQuest, fetchReservedQuests } from '../store/action';
 
 type QuestCardProps = {
   data: QuestCardData;
   place?: string;
+  placeId?: string;
 }
 
-export function QuestCard ({data, place}: QuestCardProps): JSX.Element {
+export function QuestCard ({data, place, placeId}: QuestCardProps): JSX.Element {
+  const dispatch = useAppDispatch();
   const {id, title, previewImg, previewImgWebp, level, peopleMinMax} = data;
 
+  const onClickDeletQuest = () => {
+    dispatch(deleteBookingQuest(placeId as string));
+    dispatch(fetchReservedQuests());
+  };
 
   return (
 
@@ -36,7 +44,7 @@ export function QuestCard ({data, place}: QuestCardProps): JSX.Element {
             </svg>{superTranslator(level)}
           </li>
         </ul>
-        {place === 'my-quest' && <button className="btn btn--accent btn--secondary quest-card__btn" type="button">Отменить</button>}
+        {place === 'my-quest' && <button onClick={onClickDeletQuest} className="btn btn--accent btn--secondary quest-card__btn" type="button">Отменить</button>}
       </div>
     </div>
   );

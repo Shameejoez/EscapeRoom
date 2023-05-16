@@ -26,6 +26,8 @@ type MapProps = {
 
 export function Map ({location, center , onClickCurrent = () => void 0, activeAdress }: MapProps): JSX.Element {
 
+  const INT_FOR_RANDOM = 0.004;
+  const changeRandom = (int: number) => (Math.random() * INT_FOR_RANDOM);
 
   const onClickGetCoords = (coord: number []) => {
     onClickCurrent(coord);
@@ -40,7 +42,7 @@ export function Map ({location, center , onClickCurrent = () => void 0, activeAd
       />
       {location.map(({location:loc, id}) =>
         (<Marker key={id} icon={loc === activeAdress ? activeCustomIcon : defaultCustomIcon}
-          position={{lat: loc[0], lng:loc[1]}}
+          position={{lat: loc[0] - changeRandom(INT_FOR_RANDOM) , lng:loc[1] + changeRandom(INT_FOR_RANDOM)}}
           eventHandlers={{
             click: () =>
               onClickGetCoords(loc)

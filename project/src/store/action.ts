@@ -5,9 +5,10 @@ import type {
   BookingData, QuestCardData, QuestDetails,
   BookingQuestData, ReservedQuests, User, BookingQuest, userAuth
 } from '../types/types';
-import { ApiRoute, RequestStatus, AppRoutes } from '../utils/consts';
+import { ApiRoute, RequestStatus, AppRoutes, ActivePlaceName } from '../utils/consts';
 import { AppDispatch } from '../types/state';
 import type { History } from 'history';
+import { setActivePage } from './site-procces/site-slicer';
 
 type Extra = {
   api: AxiosInstance;
@@ -22,7 +23,8 @@ export const Action = {
   POST_BOOKING_QUEST: 'bookingQuest/post',
   FETCH_RESERVED_QUESTS: 'ReservedQuests/fetch',
   CHEK_USER_STATUS: 'chekUser/get',
-  LOGIN: 'login/get'
+  LOGIN: 'login/get',
+  DELETE_QUEST: 'quest/delete'
 
 };
 
@@ -69,16 +71,17 @@ export const fetchBookingInfo = createAsyncThunk<BookingData[], QuestCardData['i
   }
 );
 
-//Скорее всего тут есть ошибка
-export const postBookingQuest = createAsyncThunk<BookingQuestData, BookingQuest, { extra: Extra }>(
+export const postBookingQuest = createAsyncThunk<BookingQuestData, BookingQuest, { extra: Extra; dispatch: AppDispatch }>(
   Action.POST_BOOKING_QUEST,
-  async ({ id, contactPerson, date, peopleCount, phone, placeId, time, withChildren }, { extra }) => {
+  async ({ id, contactPerson, date, peopleCount, phone, placeId, time, withChildren }, { extra, dispatch }) => {
 
     const bookingData: BookingQuestData = { contactPerson, date, peopleCount, phone, placeId, time, withChildren };
     const { api, history } = extra;
+
     try {
-      const { data } = await api.post<BookingQuestData>(`${ApiRoute.GetQuests}/${id}${ApiRoute.Booking}1`, bookingData);
+      const { data } = await api.post<BookingQuestData>(`${ApiRoute.GetQuests}/${id}${ApiRoute.Booking}`, bookingData);
       history.push(AppRoutes.MyQusets);
+      dispatch(setActivePage(ActivePlaceName.MyQuests));
       return data;
 
     } catch (err) {
@@ -123,3 +126,23 @@ export const loginUser = createAsyncThunk<User['email'], userAuth, { extra: Extr
 
     return email;
   });
+
+
+export const deleteBookingQuest = createAsyncThunk<undefined, BookingQuestData['placeId'], { extra: Extra }>(
+  Action.DELETE_QUEST,
+  async(placeId, {extra }) => {
+    const { api, history } = extra;
+
+    try {
+      const { data } = await api.delete<undefined>(`${ApiRoute.Reservation}/${placeId}`);
+
+      history.push(AppRoutes.CancelQuest);
+      setTimeout(() => history.push(AppRoutes.MyQusets), 1000 );
+
+      return data;
+    } catch (err) {
+      err && history.push(AppRoutes.Error);
+      return Promise.reject(err);
+    }
+  }
+);

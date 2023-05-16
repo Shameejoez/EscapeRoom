@@ -68,4 +68,5 @@ export type LevelType = 'Любой'| 'Лёгкий' | 'Средний' | 'Сл�
 
 export type BookingQuest = Pick<QuestCardData, 'id'> & BookingQuestData;
 export type userAuth = Pick<User, 'email'> & {password: string};
-export type ReservedQuests = BookingQuestData & Pick<BookingData, 'location'> & {quest : QuestCardData};
+export type ReservedQuests = Omit<BookingQuestData, 'placeId'> & Pick<BookingData, 'location'> & {quest : QuestCardData} & {id:string};
+

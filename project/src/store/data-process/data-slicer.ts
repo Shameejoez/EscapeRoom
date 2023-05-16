@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
-import { DataStore } from '../types/state';
-import { StoreSliceName } from '../utils/consts';
-import { fetchBookingInfo, fetchQuest, fetchQuests, fetchReservedQuests } from './action';
+import { DataStore } from '../../types/state';
+import { StoreSliceName } from '../../utils/consts';
+import { fetchBookingInfo, fetchQuest, fetchQuests, fetchReservedQuests } from '../action';
 
 
 const initialState: DataStore = {

@@ -29,7 +29,7 @@ function BookingForm ({bookingData, id, countPeople}: BookingProps): JSX.Element
     if(date === 'today') {
       return bookingData.slots.today.map((el) => (
         <label key={el.time} className="custom-radio booking-form__date">
-          <input type="radio" id={`today${el.time}`} required defaultValue={`today ${el.time}`} disabled={!el.isAvailable} {...register('time') } /* {...register('date', {value: 'today'}) } *//>
+          <input type="radio" id={`today${el.time}`} required defaultValue={`today ${el.time}`} disabled={!el.isAvailable} {...register('time') } />
           <span className="custom-radio__label" {...register('date')}>{el.time}</span>
         </label>)
       );} else {

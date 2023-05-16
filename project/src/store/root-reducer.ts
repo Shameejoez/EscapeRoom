@@ -1,5 +1,5 @@
 import { combineReducers} from '@reduxjs/toolkit';
-import { dataSlicer } from './data-slicer';
+import { dataSlicer } from './data-process/data-slicer';
 import { StoreSliceName } from '../utils/consts';
 import { siteSlicer } from './site-procces/site-slicer';
 import { userSlicer } from './user-process/user-slicer';

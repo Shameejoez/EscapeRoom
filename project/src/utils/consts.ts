@@ -72,7 +72,8 @@ export enum AppRoutes {
     Booking = '/booking',
     MyQusets = '/my-quests',
     NotFound = '/404',
-    Error = '/Error'
+    Error = '/Error',
+    CancelQuest = '/CancelQuest'
 }
 
 // Констатны для FilterItem
@@ -127,6 +128,7 @@ export const filters: {[key in QuestName | string]: (arg0: QuestCardData[]) => Q
   'Мистика' : (quests) => quests.filter((quest) => quest.type === 'mystic'),
   'Приключения' : (quests) => quests.filter((quest) => quest.type === 'adventures'),
   'Ужасы' : (quests) => quests.filter((quest) => quest.type === 'horror'),
+  'Sci-fi': (quests) => quests.filter((quest) => quest.type === 'sci-fi'),
   'Любой' : (quests) => quests,
   'Лёгкий' : (quests) => quests.filter((quest) => quest.level === 'easy'),
   'Средний' : (quests) => quests.filter((quest) => quest.level === 'medium'),

@@ -67,7 +67,7 @@ export function Booking(): JSX.Element | null {
           <div className="page-content__item">
             <div className="booking-map">
               <div className="map">
-                <div className="map__container">
+                <div className="map__container" style={{backgroundColor: 'black'}} >Кликните на маркер - чтобы выбрать желаемое местоположение.
                   <Map center={DefaultCenterMap} onClickCurrent={onMarkerClick} location={coordinats} activeAdress={currentAdress}/>
                 </div>
               </div>

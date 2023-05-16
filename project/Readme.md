@@ -1,3 +1,7 @@
+# Время затраченное на проект
+
+45 часа
+
 # Руководство по работе с проектом
 
 Данный проект создан с помощью [Create React App](https://github.com/facebook/create-react-app).

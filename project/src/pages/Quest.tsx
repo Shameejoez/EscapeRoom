@@ -59,7 +59,7 @@ export function Quest (): JSX.Element | null {
             </li>
           </ul>
           <p className="quest-page__description">{description}
-
+            {/* тест */}
           </p>
           <Link className="btn btn--accent btn--cta quest-page__btn" to={`${AppRoutes.Quest}/${id}${AppRoutes.Booking}`}>Забронировать</Link>
         </div>

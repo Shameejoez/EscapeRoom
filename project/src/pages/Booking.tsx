@@ -1,4 +1,4 @@
-import BookingForm from '../components/Booking-form';
+import BookingForm from '../components/booking-form';
 import Spinner from '../components/Spinner';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { getBookingsInfo, getIsBookingsInfoLoading, getQuest } from '../store/data-process/data-selectors';

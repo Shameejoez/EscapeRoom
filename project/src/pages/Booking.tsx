@@ -1,5 +1,5 @@
 import BookingForm from '../components/booking-form';
-import Spinner from '../components/Spinner';
+import Spinner from '../components/spinner';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { getBookingsInfo, getIsBookingsInfoLoading, getQuest } from '../store/data-process/data-selectors';
 import { Map } from '../components/Map';

@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { fetchQuest, fetchBookingInfo } from '../store/action';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { getIsQuestLoading, getQuest } from '../store/data-process/data-selectors';
-import Spinner from '../components/Spinner';
+import Spinner from '../components/spinner';
 import { AppRoutes} from '../utils/consts';
 import { superTranslator } from '../utils/util';
 
